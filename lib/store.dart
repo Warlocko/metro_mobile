@@ -10,11 +10,6 @@ class MmStoreStateful extends StatefulWidget {
   }
 
 class MmStore extends State<MmStoreStateful> {
-  int _currentIndex = 0;
-  final List<Widget> _children = [
-    MmHomepageStateful(),
-    MmStoreStateful(),
-  ];
 
   @override
   Widget build(BuildContext context) {

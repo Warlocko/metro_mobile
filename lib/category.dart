@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:metromobile/store.dart';
+import 'package:metromobile/product.dart';
 
 class MmCategoryStateful extends StatefulWidget {
   @override
@@ -103,51 +103,54 @@ class Product extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Container(width: 100,
-          height: 100,
-          margin: const EdgeInsets.only(top: 30.0, right: 10.0, left: 15),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(this.image),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        Container(
-          width: 220,
-          margin: EdgeInsets.only(left: 10),
-          child: Column(
-            children: <Widget>[
-              Container(
-                  width: 220,
-                  margin: EdgeInsets.only(top: 15,bottom: 20),
-                  child:
-                  Text(this.name, textAlign: TextAlign.left,
-                      style: TextStyle(color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold))
+    return new InkWell(
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmProductStateful(this.name,this.image,this.price))),
+      child: Row(
+        children: <Widget>[
+          Container(width: 100,
+            height: 100,
+            margin: const EdgeInsets.only(top: 30.0, right: 10.0, left: 15),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(this.image),
+                fit: BoxFit.cover,
               ),
-              Row(
-
-                children: <Widget>[
-                  Text("\$${this.price}",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                      textAlign: TextAlign.left),
-                  Container(
-                      margin: EdgeInsets.only(left: 50),
-                      child:
-                      Text("Comprar",
-                          style: TextStyle(color: Colors.orange, fontSize: 16))
-                  )
-                ],
-              )
-            ],
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
-        )
-      ],
+          Container(
+            width: 220,
+            margin: EdgeInsets.only(left: 10),
+            child: Column(
+              children: <Widget>[
+                Container(
+                    width: 220,
+                    margin: EdgeInsets.only(top: 15,bottom: 20),
+                    child:
+                    Text(this.name, textAlign: TextAlign.left,
+                        style: TextStyle(color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold))
+                ),
+                Row(
+
+                  children: <Widget>[
+                    Text("\$${this.price}",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        textAlign: TextAlign.left),
+                    Container(
+                        margin: EdgeInsets.only(left: 50),
+                        child:
+                        Text("Comprar",
+                            style: TextStyle(color: Colors.orange, fontSize: 16))
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
