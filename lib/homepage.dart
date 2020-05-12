@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MmHomepage extends StatelessWidget {
+class MmHomepageStateful extends StatefulWidget {
+  @override
+  MmHomepage createState() => MmHomepage();
+}
+
+class MmHomepage extends State<MmHomepageStateful> {
   @override
   Widget build(BuildContext context) {
     Map<int, Color> color = {
