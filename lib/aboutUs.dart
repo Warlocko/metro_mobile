@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:metromobile/navbar.dart';
 
 class AboutUs extends StatelessWidget {
   @override
@@ -33,18 +34,32 @@ class AboutUs extends StatelessWidget {
     return Scaffold(
       backgroundColor: myColor,
         body: SingleChildScrollView(
-
             child:
             Column(
               children: <Widget>[
+                Container(
+                    height: 50,
+                    width: double.infinity,
+                    margin: EdgeInsets.only(top: 32, left: 0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: new IconButton(
+                        icon: new Icon(Icons.arrow_back, color: Colors.white),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (
+                              context) => MmNavbarStateful()));
+                        },
+                      ),
+                    )),
             Container(
             width: double.infinity,
-              height: 460,
+              height: 500,
               color: myColor,
-              padding: EdgeInsets.only(top: 32, left: 16, bottom: 0),
+              padding: EdgeInsets.only(top: 10, left: 16),
               child: Column(
                 children: <Widget>[
                   Container(
+                    margin: EdgeInsets.only(bottom: 20),
                     child: Text(
                   "Sobre nosotros...",
                       style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Colors.white, height: 1.5)
@@ -58,7 +73,7 @@ class AboutUs extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 18, height: 1.5),
                         children: <TextSpan>[
                           TextSpan(text: 'Metro Mobile', style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: 'es una aplicación de ventas creada para la empresa ', style: TextStyle()),
+                          TextSpan(text: ' es una aplicación de ventas creada para la empresa ', style: TextStyle()),
                           TextSpan(text: 'Impulsora de Comercio Exterior Metrópoli,  S.A de C.V.  ', style: TextStyle(fontWeight: FontWeight.bold)),
                           TextSpan(text: 'ubicada en Avenida Tezozomoc 158, 02480 Azcapotzalco, CDMX México. ', style: TextStyle()),
                           TextSpan(text: '\n\nDicha empresa se encarga de la venta de equipo, bombas, válvulas, refaccionamiento, placa de acero al carbón, tubería, conexiones, accesorios, etc. \n\n Jesús Gil Ramirez', style: TextStyle()),
@@ -71,8 +86,6 @@ class AboutUs extends StatelessWidget {
                 ],
               )
             ),
-                Column(
-                  children: <Widget>[
                     Container(
                         width: double.infinity,
                         height: 175,
@@ -80,57 +93,25 @@ class AboutUs extends StatelessWidget {
                         color: myColor,
                         child: Image.asset("assets/logo.png")
                     ),
-
-
-
-                  ],
-                ),
-               SizedBox(
-                    height: 70,
-                    width: 320,
-                    child: RaisedButton(
-                      color: myblue,
-                      onPressed: () {},
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)
-                      ),
-                      padding: EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
-                      child: const Text('Contáctanos' , style: TextStyle(color: Colors.white,fontSize: 26),),
-                    ),
-
-                  ),
-
-
+               Container(
+                 margin: EdgeInsets.only(bottom: 30),
+                 child: SizedBox(
+                   height: 70,
+                   width: 320,
+                   child: RaisedButton(
+                     color: myblue,
+                     onPressed: () {},
+                     shape: RoundedRectangleBorder(
+                         borderRadius: BorderRadius.circular(12)
+                     ),
+                     padding: EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
+                     child: const Text('Contáctanos' , style: TextStyle(color: Colors.white,fontSize: 26)),
+                   ),
+                 )
+               ),
               ],
             )
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          type : BottomNavigationBarType.fixed,
-          iconSize: 30,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              title: Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.help_outline),
-              title: Text(''),
-            ),
-          ],
-          currentIndex: 0,
-          selectedItemColor: Colors.amber[800],
-          backgroundColor: myblue,
-        )
     );
   }
 }

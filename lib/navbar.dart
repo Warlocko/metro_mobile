@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:metromobile/homepage.dart';
 import 'package:metromobile/store.dart';
-import 'package:metromobile/category.dart';
+import 'package:metromobile/aboutUs.dart';
+import 'package:metromobile/user.dart';
 
 class MmNavbarStateful extends StatefulWidget {
   @override
@@ -14,7 +15,8 @@ class MmNavbar extends State<MmNavbarStateful> {
   final List<Widget> _children = [
     MmHomepageStateful(),
     MmStoreStateful(),
-    MmCategoryStateful(),
+    MmUserStateful(),
+    AboutUs()
   ];
 
   @override
