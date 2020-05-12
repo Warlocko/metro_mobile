@@ -1,24 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:metromobile/category.dart';
-import 'package:metromobile/homepage.dart';
-import 'package:metromobile/navbar.dart';
+import 'package:metromobile/store.dart';
 
-class MmStoreStateful extends StatefulWidget {
+class MmCategoryStateful extends StatefulWidget {
   @override
-    MmStore createState() => MmStore();
-  }
+  MmCategory createState() => MmCategory();
+}
 
-class MmStore extends State<MmStoreStateful> {
-  int _currentIndex = 0;
-  final List<Widget> _children = [
-    MmHomepageStateful(),
-    MmStoreStateful(),
-  ];
-
+class MmCategory extends State<MmCategoryStateful> {
   @override
   Widget build(BuildContext context) {
-    Map<int, Color> grayDisc = {
+    Map<int, Color> color = {
       50: Color.fromRGBO(54, 57, 63, .1),
       100: Color.fromRGBO(54, 57, 63, .2),
       200: Color.fromRGBO(54, 57, 63, .3),
@@ -42,18 +34,17 @@ class MmStore extends State<MmStoreStateful> {
       800: Color.fromRGBO(114, 137, 218, .9),
       900: Color.fromRGBO(114, 137, 218, 1),
     };
-    MaterialColor myGrey = MaterialColor(0xFF36393F, grayDisc);
+    MaterialColor myGrey = MaterialColor(0xFF36393F, color);
     MaterialColor myblue = MaterialColor(0xFF7289DA, blueDisc);
     return Scaffold(
       body: SingleChildScrollView(
-        child:
-        Container(
+        child: Container(
           width: double.infinity,
           height: 710,
           color: myGrey,
           child: Column(
             children: <Widget>[
-                Container(
+              Container(
                   height: 50,
                   width: double.infinity,
                   margin: EdgeInsets.only(top:32, left: 0),
@@ -62,15 +53,15 @@ class MmStore extends State<MmStoreStateful> {
                     child: new IconButton(
                       icon: new Icon(Icons.arrow_back, color: Colors.white),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => MmNavbarStateful()));
+                        Navigator.pop(context);
                       },
                     ),
                   )
-                ),
+              ),
               Container(
-                width: double.infinity,
-                child:
-                  Text("Nuestro Catálogo", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 26),)
+                  width: double.infinity,
+                  child:
+                  Text("Válvulas", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 26),)
               ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.85,
@@ -87,61 +78,76 @@ class MmStore extends State<MmStoreStateful> {
                   ),
                 ),
               ),
-              Category("assets/valvula1.jpg", "Válvulas"),
-              Category("assets/bomba1.jpg", "Bombas"),
-              Category("assets/tubos2.jpg", "Tuberías"),
-              Category("assets/placa1.jpg", "Placas de acero al carbón"),
+              Product("assets/valvula1.jpg", "Válvula de compuerta 150",
+                  "33,250.30"),
+              Product("assets/valvula4.jpg", "Válvula de esfera de latón",
+                  "168.20"),
+              Product(
+                  "assets/valvula2.jpg", "Válvula esfera 400", "230.00"),
+              Product(
+                  "assets/valvula3.jpg", "Válvula check de oxígeno", "214.29"),
             ],
           ),
-        )
+        ),
       ),
     );
   }
 }
 
-class Category extends StatelessWidget {
+class Product extends StatelessWidget {
   final String image;
   final String name;
+  final String price;
 
-  Category(this.image, this.name);
+  Product(this.image, this.name, this.price);
 
   @override
   Widget build(BuildContext context) {
-    return new InkWell(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmCategoryStateful())),
-        child: Row(
-          children: <Widget>[
-            Container(width: 100,
-              height: 100,
-              margin: const EdgeInsets.only(top: 30.0, right: 10.0, left: 16),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(this.image),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(50),
-              ),
+    return Row(
+      children: <Widget>[
+        Container(width: 100,
+          height: 100,
+          margin: const EdgeInsets.only(top: 30.0, right: 10.0, left: 15),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(this.image),
+              fit: BoxFit.cover,
             ),
-            Container(
-              width: 220,
-              margin: EdgeInsets.only(left: 10),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                      width: 220,
-                      margin: EdgeInsets.only(top: 50,bottom: 20),
-                      child:
-                      Text(this.name, textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold))
-                  ),
-                ],
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        Container(
+          width: 220,
+          margin: EdgeInsets.only(left: 10),
+          child: Column(
+            children: <Widget>[
+              Container(
+                  width: 220,
+                  margin: EdgeInsets.only(top: 15,bottom: 20),
+                  child:
+                  Text(this.name, textAlign: TextAlign.left,
+                      style: TextStyle(color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold))
               ),
-            )
-          ],
+              Row(
+
+                children: <Widget>[
+                  Text("\$${this.price}",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      textAlign: TextAlign.left),
+                  Container(
+                      margin: EdgeInsets.only(left: 50),
+                      child:
+                      Text("Comprar",
+                          style: TextStyle(color: Colors.orange, fontSize: 16))
+                  )
+                ],
+              )
+            ],
+          ),
         )
-    )
-      ;
+      ],
+    );
   }
 }

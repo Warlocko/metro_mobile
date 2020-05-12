@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'homepage.dart';
-import 'store.dart';
+import 'navbar.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),
-      home: MmStoreStateful(),
+      home: MmNavbarStateful(),
     );
   }
 }

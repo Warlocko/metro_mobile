@@ -86,33 +86,6 @@ class MmHomepage extends State<MmHomepageStateful> {
               ],
             )
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          type : BottomNavigationBarType.fixed,
-          iconSize: 30,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              title: Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.help_outline),
-              title: Text(''),
-            ),
-          ],
-          currentIndex: 0,
-          selectedItemColor: Colors.amber[800],
-          backgroundColor: myblue,
-        )
     );
   }
 }
@@ -200,20 +173,20 @@ class Product extends StatelessWidget {
                   child:
                   Text(this.name, textAlign: TextAlign.left,
                       style: TextStyle(color: Colors.white,
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold))
               ),
               Row(
 
                 children: <Widget>[
                   Text("\$${this.price}",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: TextStyle(color: Colors.white, fontSize: 16),
                       textAlign: TextAlign.left),
                   Container(
                       margin: EdgeInsets.only(left: 50),
                       child:
                       Text("Comprar",
-                          style: TextStyle(color: Colors.orange, fontSize: 18))
+                          style: TextStyle(color: Colors.orange, fontSize: 16))
                   )
                 ],
               )
