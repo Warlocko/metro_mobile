@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:metromobile/store.dart';
 
 class MmConfirmationStateful extends StatefulWidget {
   @override
@@ -41,7 +42,7 @@ class MmConfirmation extends State<MmConfirmationStateful> {
         body: SingleChildScrollView(
             child: Container(
                 width: double.infinity,
-                height: 770,
+                height: 600,
                 color: myGrey,
                 child: Column(children: <Widget>[
                   Container(
@@ -59,11 +60,33 @@ class MmConfirmation extends State<MmConfirmationStateful> {
                       )),
                   Container(
                       width: double.infinity,
+                      margin: EdgeInsets.only(top: 50, bottom: 20),
                       child:
-                      Text("¡Tú pedido ha sido realizado!", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 26),)
+                      Text("¡Tú pedido ha sido realizado!", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 26),)
                   ),
                   Container(
-
+                    margin: EdgeInsets.only(top: 20, bottom: 40),
+                    width: MediaQuery.of(context).size.width * 0.90,
+                    child: RichText(
+                      text: TextSpan(
+                        style: TextStyle(color: Colors.white, fontSize: 18, height: 1.5),
+                        children: <TextSpan>[
+                          TextSpan(text: "Tu compra ha sido realizada con éxito, el número de tu orden es", style: TextStyle()),
+                          TextSpan(text: " #45623988 ", style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: "y está siendo procesada en nuestro almacén.", style: TextStyle()),
+                          TextSpan(text: "\n\n¡Mantén contacto con nosotros o regresa a la tienda a ver más de nuestros productos!.", style: TextStyle()),
+                        ]
+                      ),
+                    ),
+                  ),
+                  RaisedButton(
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmStoreStateful())),
+                    color: myblue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)
+                    ),
+                    padding: EdgeInsets.only(top: 20, bottom: 20, left: 75, right: 75),
+                    child: const Text('Regresar a la tienda', style: TextStyle(color: Colors.white, fontSize: 18)),
                   )
                 ]))));
   }
