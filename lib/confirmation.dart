@@ -8,7 +8,6 @@ class MmConfirmationStateful extends StatefulWidget {
 }
 
 class MmConfirmation extends State<MmConfirmationStateful> {
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
