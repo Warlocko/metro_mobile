@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metromobile/logIn.dart';
 
 import 'navbar.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),
-      home: MmNavbarStateful(),
+      home: MmLogInStateful(),
     );
   }
 }

@@ -40,7 +40,7 @@ class MmUserEdit extends State<MmUserEditStateful> {
         body: SingleChildScrollView(
             child: Container(
                 width: double.infinity,
-                height: 600,
+                height: 900,
                 color: myGrey,
                 child: Column(children: <Widget>[
                   Container(
@@ -75,7 +75,7 @@ class MmUserEdit extends State<MmUserEditStateful> {
                                       border: OutlineInputBorder(),
                                       fillColor: Colors.black.withOpacity(0.5),
                                       labelStyle: TextStyle(color: Colors.white),
-                                      labelText: 'Buscar un Producto',
+                                      labelText: 'Nombre de Usuario',
                                     ),
                                   ),
                                 ),

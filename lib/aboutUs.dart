@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:metromobile/contactUs.dart';
 import 'package:metromobile/navbar.dart';
 
 class AboutUs extends StatelessWidget {
@@ -100,7 +101,7 @@ class AboutUs extends StatelessWidget {
                    width: 320,
                    child: RaisedButton(
                      color: myblue,
-                     onPressed: () {},
+                     onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ContactUs())),
                      shape: RoundedRectangleBorder(
                          borderRadius: BorderRadius.circular(12)
                      ),
