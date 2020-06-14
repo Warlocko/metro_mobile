@@ -104,6 +104,39 @@ class MmUserEdit extends State<MmUserEditStateful> {
                               borderRadius: BorderRadius.circular(100),
                             ),
                           ),
+                          Container(
+                            height: 45,
+                            margin: EdgeInsets.only(top: 15, left: 45),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text("Editar Dirección",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                          ),
+                          Container(
+
+                              width: MediaQuery.of(context).size.width * 0.80,
+                              margin: EdgeInsets.only(left:12,top:12,right:12,bottom: 31),
+
+                              height: 5 * 12.0,
+
+                              child: TextFormField(
+                                maxLines: null,
+                                style: TextStyle(color: Colors.white),
+                                keyboardType: TextInputType.multiline,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 1.0),
+                                  filled: true,
+                                  border: OutlineInputBorder(),
+                                  fillColor: Colors.black.withOpacity(0.5),
+                                  labelStyle: TextStyle(color: Colors.white),
+
+                                ),
+                              )),
                         ],
                       )),
                   RaisedButton(
