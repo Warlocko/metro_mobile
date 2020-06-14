@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:metromobile/auth.dart';
-import 'package:metromobile/navbar.dart';
-import 'package:metromobile/register.dart';
+import 'package:metromobile/loading.dart';
 
 class MmLogInStateful extends StatefulWidget {
 
@@ -16,9 +15,12 @@ class MmLogInStateful extends StatefulWidget {
 class MmLogIn extends State<MmLogInStateful>{
 
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class MmLogIn extends State<MmLogInStateful>{
     MaterialColor myColor = MaterialColor(0xFF36393F, color);
     MaterialColor myblue = MaterialColor(0xFF7289DA, blueDisc);
 
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       body: SingleChildScrollView(
         child:
         Column(
@@ -59,7 +61,7 @@ class MmLogIn extends State<MmLogInStateful>{
               height: 800,
               color: myColor,
               child: Form(
-                //key: _formKey,
+                key: _formKey,
                 child: Column( children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(bottom: 25, top: 110),
@@ -96,12 +98,7 @@ class MmLogIn extends State<MmLogInStateful>{
                           labelStyle: TextStyle(color: Colors.white),
                           labelText: 'Correo Electrónico',
                         ),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Porfavor llena el campo con la información solicitada';
-                          }
-                          return null;
-                        },
+                        validator: (value) =>  value.isEmpty ? 'Ingresa un correo' : null,
                       )
                   ),
                   Container(
@@ -121,12 +118,7 @@ class MmLogIn extends State<MmLogInStateful>{
                           labelText: 'Contraseña',
                         ),
                         obscureText: true,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Porfavor llena el campo con la información solicitada';
-                          }
-                          return null;
-                        },
+                        validator: (value) =>  value.isEmpty ? 'Ingresa un password' : null,
                       )
                   ),
                   Container(
@@ -138,12 +130,26 @@ class MmLogIn extends State<MmLogInStateful>{
                           child: Text("¿No tienes cuenta?" ,style: TextStyle(color: Colors.orange, fontSize: 16)),
                       ),
                   ),
+                  SizedBox(height: 12.0),
+                  Text(
+                    error,
+                    style: TextStyle(color: Colors.red, fontSize: 14.0),
+                  ),
                   Container(
-                      margin: EdgeInsets.only(top: 40),
+                      margin: EdgeInsets.only(top: 20),
                       child:
                       RaisedButton(
                         onPressed: () async {
-
+                          if(_formKey.currentState.validate()){
+                            setState(() => loading = true);
+                            dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                            if(result == null){
+                              setState(() {
+                                error = 'Problema al iniciar sesión con esos datos.';
+                                loading = false;
+                              });
+                            }
+                          }
                         },
                         //=> Navigator.push(context, MaterialPageRoute(builder: (context) => MmNavbarStateful())),
                         color: myblue,

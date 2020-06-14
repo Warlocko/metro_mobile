@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:metromobile/auth.dart';
-import 'package:metromobile/logIn.dart';
-import 'package:metromobile/navbar.dart';
+import 'package:metromobile/loading.dart';
 
 class MmRegisterStateful extends StatefulWidget {
 
@@ -17,6 +16,7 @@ class MmRegister extends State<MmRegisterStateful>{
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String username = '';
   String email = '';
@@ -52,7 +52,7 @@ class MmRegister extends State<MmRegisterStateful>{
     MaterialColor myColor = MaterialColor(0xFF36393F, color);
     MaterialColor myblue = MaterialColor(0xFF7289DA, blueDisc);
 
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
         body: SingleChildScrollView(
           child:
           Column(
@@ -150,17 +150,24 @@ class MmRegister extends State<MmRegisterStateful>{
                         child: Text("¿Tienes una cuenta registrada?" ,style: TextStyle(color: Colors.orange, fontSize: 16)),
                       ),
                     ),
+                    SizedBox(height: 12.0),
+                    Text(
+                      error,
+                      style: TextStyle(color: Colors.red, fontSize: 14.0),
+                    ),
                     Container(
-                        margin: EdgeInsets.only(top: 40),
+                        margin: EdgeInsets.only(top: 20),
                         child:
                         RaisedButton(
                           onPressed: () async {
                             if(_formKey.currentState.validate()){
+                              setState(() => loading = true);
                               dynamic result = await _auth.registerWithEmailAndPassword(email, password);
                               if(result == null){
-                                setState(() => error = 'Ingresa un correo válido.');
-                              }else{
-
+                                setState(() {
+                                  error = 'Ingresa un correo válido.';
+                                  loading = false;
+                                });
                               }
                             }
                           },
@@ -171,7 +178,7 @@ class MmRegister extends State<MmRegisterStateful>{
                               top: 20, bottom: 20, left: 75, right: 75),
                           child: const Text('Crear una cuenta',
                               style: TextStyle(color: Colors.white, fontSize: 22)),
-                        )
+                        ),
                     ),
                   ],
                   ),
