@@ -41,7 +41,7 @@ class MmUser extends State<MmUserStateful> {
         body: SingleChildScrollView(
             child: Container(
                 width: double.infinity,
-                height: 700,
+                height: 825,
                 color: myGrey,
                 child: Column(children: <Widget>[
                   Container(
@@ -213,6 +213,33 @@ class MmUser extends State<MmUserStateful> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text("Pedido #85369201",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        height: 1.5,
+                                        fontSize: 18)),
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.only(left: 30, right: 30),
+                          child: Column(
+                            children: <Widget>[
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text("\nDirección asociada a la cuenta",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        height: 1.5,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text("En la casa de tu puta madre #69 Nice, Col. El pueblo perdido de Macías",
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                         color: Colors.white,
