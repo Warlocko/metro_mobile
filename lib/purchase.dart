@@ -238,45 +238,13 @@ class MmPurchase extends State<MmPurchaseStateful> {
               //PREPARA DATOS PARA EL POST A STRIPE
               _concepto = _concepto+now.toString();
               _concepto = _concepto+" Monto: "+_montoDetallado+" MXN";
-              if (_formKey.currentState.validate()) {
 
-                try {
+
                   //EMPEZAR EL PAGO PEDIR UN TOKEN
                   getToken();
-                } on Exception  catch(e) {
 
 
 
-                    // set up the button
-                    Widget okButton = FlatButton(
-                      child: Text("OK"),
-                      onPressed: () { },
-                    );
-
-                    // set up the AlertDialog
-                    AlertDialog alert = AlertDialog(
-                      title: Text("My title"),
-                      content: Text("This is my message."),
-                      actions: [
-                        okButton,
-                      ],
-                    );
-
-                    // show the dialog
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return alert;
-                      },
-                    );
-
-
-
-
-
-                }
-
-              }
             },
             color: Colors.orange,
             shape:
@@ -320,9 +288,47 @@ class MmPurchase extends State<MmPurchaseStateful> {
         myControllerMonEXP.text,myControllerCVC.text,
         _secretKey).then((data){
       setState(() {
-        _token = data;
-        //YA ESTATODO SI HAY TOKEN SE PAGA
+
+        print(data);
+        if(data.contains('"error"')){
+          _token = "Error en los datos de la tarjeta, favor de verificarlos";
+        print("Error detectado en los datos de la tarheta por Stripe!");
+
+
+          // set up the button
+          Widget okButton = FlatButton(
+            child: Text("OK"),
+            onPressed: () {Navigator.pop(context); },
+          );
+
+          // set up the AlertDialog
+          AlertDialog alert = AlertDialog(
+            title: Text("Error"),
+            content: Text("Por favor verifica los datos de tu tarjeta"),
+            actions: [
+              okButton,
+            ],
+          );
+
+          // show the dialog
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return alert;
+            },
+          );
+
+
+        }
+        else {
+          _token = data;
           setCharge();
+
+
+
+
+
+        }
       });
 
 
@@ -342,8 +348,7 @@ class MmPurchase extends State<MmPurchaseStateful> {
     _concepto = _concepto+", Pedido #"+orderID;
 
     //usa _token para autorizar el pago
-    if (_token=='Sin token'){
-      print('no puedes realizar pago');
+    if (_token=='Sin token'|| _token=="Error en los datos de la tarjeta, favor de verificarlos"){print('No puedes realizar pago');
 
     }
     else{
