@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:metromobile/store.dart';
 
 class MmConfirmationStateful extends StatefulWidget {
+
+  final String orderID;
+
+  MmConfirmationStateful(this.orderID);
+
   @override
   MmConfirmation createState() => MmConfirmation();
 }
@@ -10,6 +15,14 @@ class MmConfirmationStateful extends StatefulWidget {
 class MmConfirmation extends State<MmConfirmationStateful> {
 
   @override
+
+  void initState() {
+    _pedido               = widget.orderID;
+  }
+
+  String _pedido               = "sin pedido";
+
+
   Widget build(BuildContext context) {
     Map<int, Color> grayDisc = {
       50: Color.fromRGBO(54, 57, 63, .1),
@@ -71,8 +84,8 @@ class MmConfirmation extends State<MmConfirmationStateful> {
                         style: TextStyle(color: Colors.white, fontSize: 18, height: 1.5),
                         children: <TextSpan>[
                           TextSpan(text: "Tu compra ha sido realizada con éxito, el número de tu orden es", style: TextStyle()),
-                          TextSpan(text: " #45623988 ", style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: "y está siendo procesada en nuestro almacén.", style: TextStyle()),
+                          TextSpan(text: " #$_pedido", style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: " y está siendo procesada en nuestro almacén.", style: TextStyle()),
                           TextSpan(text: "\n\n¡Mantén contacto con nosotros o regresa a la tienda a ver más de nuestros productos!.", style: TextStyle()),
                         ]
                       ),

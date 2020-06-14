@@ -94,7 +94,10 @@ class MmProduct extends State<MmProductStateful> {
                   ),
                   const SizedBox(height: 25),
                   RaisedButton(
-                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmPurchaseStateful())),
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                        MmPurchaseStateful(widget.price)
+
+                    )),
                     color: Colors.orange,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25)
