@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "295519811875",
+    "firebase_url": "https://metro-mobile-1.firebaseio.com",
+    "project_id": "metro-mobile-1",
+    "storage_bucket": "metro-mobile-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295519811875:android:baef1043ddd28b3bc7f496",
+        "android_client_info": {
+          "package_name": "metro.mobile.metromobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295519811875-mpsk06cic8l2i4ahcg1nc7qltjveti0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjlf2UAi2JL8X-O27lgkaM61ee8MqVyJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295519811875-mpsk06cic8l2i4ahcg1nc7qltjveti0q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
