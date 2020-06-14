@@ -220,14 +220,7 @@ class ContactUs extends StatelessWidget {
                                       padding: EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
                                       child: const Text('Enviar' , style: TextStyle(color: Colors.white,fontSize: 26)),
                                     ),))
-
-
                             ])))),
-
-
-
-
-
               ]),
             )));
   }

@@ -1,14 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:metromobile/auth.dart';
 import 'package:metromobile/logIn.dart';
 import 'package:metromobile/navbar.dart';
 
 class MmRegisterStateful extends StatefulWidget {
+
+  final Function toggleView;
+  MmRegisterStateful({this.toggleView});
+
   @override
   MmRegister createState() => MmRegister();
 }
 
 class MmRegister extends State<MmRegisterStateful>{
+
+  final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+
+  String username = '';
+  String email = '';
+  String password = '';
+  String error = '';
+
   @override
   Widget build(BuildContext context) {
     Map<int, Color> color = {
@@ -48,7 +62,7 @@ class MmRegister extends State<MmRegisterStateful>{
                 height: 800,
                 color: myColor,
                 child: Form(
-                  //key: _formKey,
+                  key: _formKey,
                   child: Column( children: <Widget>[
                     Container(
                       margin: EdgeInsets.only(bottom: 25, top: 110),
@@ -73,6 +87,9 @@ class MmRegister extends State<MmRegisterStateful>{
                         height: 50,
                         width: MediaQuery.of(context).size.width * 0.80,
                         child: TextFormField(
+                          onChanged: (val){
+                            setState(() => username = val);
+                          },
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             filled: true,
@@ -81,12 +98,7 @@ class MmRegister extends State<MmRegisterStateful>{
                             labelStyle: TextStyle(color: Colors.white),
                             labelText: 'Nombre de usuario',
                           ),
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Porfavor llena el campo con la información solicitada';
-                            }
-                            return null;
-                          },
+                            validator: (value) =>  value.isEmpty ? 'Ingresa un usuario' : null,
                         )
                     ),
                     Container(
@@ -94,6 +106,9 @@ class MmRegister extends State<MmRegisterStateful>{
                         height: 50,
                         width: MediaQuery.of(context).size.width * 0.80,
                         child: TextFormField(
+                          onChanged: (val){
+                            setState(() => email = val);
+                          },
                           style: TextStyle(color: Colors.white),
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
@@ -103,12 +118,7 @@ class MmRegister extends State<MmRegisterStateful>{
                             labelStyle: TextStyle(color: Colors.white),
                             labelText: 'Correo Electrónico',
                           ),
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Porfavor llena el campo con la información solicitada';
-                            }
-                            return null;
-                          },
+                          validator: (value) =>  value.isEmpty ? 'Ingresa un correo' : null,
                         )
                     ),
                     Container(
@@ -116,6 +126,9 @@ class MmRegister extends State<MmRegisterStateful>{
                         height: 50,
                         width: MediaQuery.of(context).size.width * 0.80,
                         child: TextFormField(
+                          onChanged: (val){
+                            setState(() => password = val);
+                          },
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             filled: true,
@@ -125,26 +138,32 @@ class MmRegister extends State<MmRegisterStateful>{
                             labelText: 'Contraseña',
                           ),
                           obscureText: true,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Porfavor llena el campo con la información solicitada';
-                            }
-                            return null;
-                          },
+                          validator: (value) =>  value.length < 8 ? 'Ingresa un password mayor a 8 caracteres' : null,
                         )
                     ),
                     Container(
                       child:
                       FlatButton(
-                        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmLogInStateful())),
-                        child: Text("¿Tienes una cuenta ya?" ,style: TextStyle(color: Colors.orange, fontSize: 16)),
+                        onPressed: () {
+                          widget.toggleView();
+                        },
+                        child: Text("¿Tienes una cuenta registrada?" ,style: TextStyle(color: Colors.orange, fontSize: 16)),
                       ),
                     ),
                     Container(
                         margin: EdgeInsets.only(top: 40),
                         child:
                         RaisedButton(
-                          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmNavbarStateful())),
+                          onPressed: () async {
+                            if(_formKey.currentState.validate()){
+                              dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                              if(result == null){
+                                setState(() => error = 'Ingresa un correo válido.');
+                              }else{
+
+                              }
+                            }
+                          },
                           color: Colors.orange,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),

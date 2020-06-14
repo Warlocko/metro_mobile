@@ -1,14 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:metromobile/auth.dart';
 import 'package:metromobile/navbar.dart';
 import 'package:metromobile/register.dart';
 
 class MmLogInStateful extends StatefulWidget {
+
+  final Function toggleView;
+  MmLogInStateful({this.toggleView});
+
   @override
   MmLogIn createState() => MmLogIn();
 }
 
 class MmLogIn extends State<MmLogInStateful>{
+
+  final AuthService _auth = AuthService();
+
+  String email = '';
+  String password = '';
+
   @override
   Widget build(BuildContext context) {
     Map<int, Color> color = {
@@ -73,6 +84,9 @@ class MmLogIn extends State<MmLogInStateful>{
                       height: 50,
                       width: MediaQuery.of(context).size.width * 0.80,
                       child: TextFormField(
+                        onChanged: (val){
+                          setState(() => email = val);
+                        },
                         style: TextStyle(color: Colors.white),
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
@@ -95,6 +109,9 @@ class MmLogIn extends State<MmLogInStateful>{
                       height: 50,
                       width: MediaQuery.of(context).size.width * 0.80,
                       child: TextFormField(
+                        onChanged: (val){
+                          setState(() => password = val);
+                        },
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           filled: true,
@@ -115,7 +132,9 @@ class MmLogIn extends State<MmLogInStateful>{
                   Container(
                       child:
                       FlatButton(
-                        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmRegisterStateful())),
+                        onPressed: () {
+                          widget.toggleView();
+                        },
                           child: Text("¿No tienes cuenta?" ,style: TextStyle(color: Colors.orange, fontSize: 16)),
                       ),
                   ),
@@ -123,7 +142,10 @@ class MmLogIn extends State<MmLogInStateful>{
                       margin: EdgeInsets.only(top: 40),
                       child:
                       RaisedButton(
-                        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmNavbarStateful())),
+                        onPressed: () async {
+
+                        },
+                        //=> Navigator.push(context, MaterialPageRoute(builder: (context) => MmNavbarStateful())),
                         color: myblue,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),

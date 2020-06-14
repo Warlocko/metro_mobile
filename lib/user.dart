@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:metromobile/auth.dart';
 import 'package:metromobile/editUser.dart';
 import 'package:metromobile/navbar.dart';
 
@@ -9,6 +10,9 @@ class MmUserStateful extends StatefulWidget {
 }
 
 class MmUser extends State<MmUserStateful> {
+
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     Map<int, Color> grayDisc = {
@@ -132,10 +136,9 @@ class MmUser extends State<MmUserStateful> {
                   Container(
                       margin: EdgeInsets.only(top: 30),
                       child: RaisedButton(
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MmUserEditStateful())),
+                        onPressed: () async {
+                          await _auth.signOut();
+                        },
                         color: Colors.orange,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
