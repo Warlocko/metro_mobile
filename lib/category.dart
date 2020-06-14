@@ -40,7 +40,7 @@ class MmCategory extends State<MmCategoryStateful> {
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
-          height: 710,
+          height: 750,
           color: myGrey,
           child: Column(
             children: <Widget>[
