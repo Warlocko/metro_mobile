@@ -30,20 +30,7 @@ class MmCategory extends State<MmCategoryStateful> {
       800: Color.fromRGBO(54, 57, 63, .9),
       900: Color.fromRGBO(54, 57, 63, 1),
     };
-    Map<int, Color> blueDisc = {
-      50: Color.fromRGBO(114, 137, 218, .1),
-      100: Color.fromRGBO(114, 137, 218,.2),
-      200: Color.fromRGBO(114, 137, 218, .3),
-      300: Color.fromRGBO(114, 137, 218, .4),
-      400: Color.fromRGBO(114, 137, 218, .5),
-      500: Color.fromRGBO(114, 137, 218, .6),
-      600: Color.fromRGBO(114, 137, 218, .7),
-      700: Color.fromRGBO(114, 137, 218, .8),
-      800: Color.fromRGBO(114, 137, 218, .9),
-      900: Color.fromRGBO(114, 137, 218, 1),
-    };
     MaterialColor myGrey = MaterialColor(0xFF36393F, color);
-    MaterialColor myblue = MaterialColor(0xFF7289DA, blueDisc);
     return StreamProvider<List<ProductM>>.value(
           value: DatabaseService().getCategoryProducts(widget.id),
           child: Scaffold(
@@ -73,21 +60,6 @@ class MmCategory extends State<MmCategoryStateful> {
                       child:
                       Text("Válvulas", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 26),)
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.85,
-                    height: 50,
-                    margin: EdgeInsets.only(top: 20),
-                    child: TextField(
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        filled: true,
-                        border: OutlineInputBorder(),
-                        fillColor: Colors.black.withOpacity(0.5),
-                        labelStyle: TextStyle(color: Colors.white),
-                        labelText: 'Buscar un Producto',
-                      ),
-                    ),
-                  ),
                   ProductCard(widget.id),
                 ],
               ),
@@ -110,8 +82,6 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
-
-    final products = Provider.of<List<ProductM>>(context);
 
     return Expanded(
               child: StreamBuilder(

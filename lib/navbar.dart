@@ -24,19 +24,6 @@ class MmNavbar extends State<MmNavbarStateful> {
 
   @override
   Widget build(BuildContext context) {
-
-    Map<int, Color> grayDisc = {
-      50: Color.fromRGBO(54, 57, 63, .1),
-      100: Color.fromRGBO(54, 57, 63, .2),
-      200: Color.fromRGBO(54, 57, 63, .3),
-      300: Color.fromRGBO(54, 57, 63, .4),
-      400: Color.fromRGBO(54, 57, 63, .5),
-      500: Color.fromRGBO(54, 57, 63, .6),
-      600: Color.fromRGBO(54, 57, 63, .7),
-      700: Color.fromRGBO(54, 57, 63, .8),
-      800: Color.fromRGBO(54, 57, 63, .9),
-      900: Color.fromRGBO(54, 57, 63, 1),
-    };
     Map<int, Color> blueDisc = {
       50: Color.fromRGBO(114, 137, 218, .1),
       100: Color.fromRGBO(114, 137, 218, .2),
@@ -49,7 +36,6 @@ class MmNavbar extends State<MmNavbarStateful> {
       800: Color.fromRGBO(114, 137, 218, .9),
       900: Color.fromRGBO(114, 137, 218, 1),
     };
-    MaterialColor myGrey = MaterialColor(0xFF36393F, grayDisc);
     MaterialColor myblue = MaterialColor(0xFF7289DA, blueDisc);
     return StreamProvider<List<CategoryM>>.value(
         value: DatabaseService().categories,

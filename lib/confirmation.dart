@@ -17,6 +17,7 @@ class MmConfirmation extends State<MmConfirmationStateful> {
   @override
 
   void initState() {
+    super.initState();
     _pedido               = widget.orderID;
   }
 

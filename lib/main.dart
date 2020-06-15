@@ -4,8 +4,6 @@ import 'package:metromobile/auth.dart';
 import 'package:metromobile/wrapper.dart';
 import 'package:provider/provider.dart';
 
-import 'navbar.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {

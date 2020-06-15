@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:metromobile/database.dart';
 import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:metromobile/UserM.dart';
+import 'package:metromobile/loading.dart';
 
 class MmHomepageStateful extends StatefulWidget {
   @override
@@ -14,6 +14,7 @@ class MmHomepage extends State<MmHomepageStateful> {
   @override
   Widget build(BuildContext context) {
 
+    final user = Provider.of<UserM>(context);
 
     Map<int, Color> color = {
       50: Color.fromRGBO(54, 57, 63, .1),
@@ -27,76 +28,85 @@ class MmHomepage extends State<MmHomepageStateful> {
       800: Color.fromRGBO(54, 57, 63, .9),
       900: Color.fromRGBO(54, 57, 63, 1),
     };
-    Map<int, Color> blueDisc = {
-      50: Color.fromRGBO(114, 137, 218, .1),
-      100: Color.fromRGBO(114, 137, 218,.2),
-      200: Color.fromRGBO(114, 137, 218, .3),
-      300: Color.fromRGBO(114, 137, 218, .4),
-      400: Color.fromRGBO(114, 137, 218, .5),
-      500: Color.fromRGBO(114, 137, 218, .6),
-      600: Color.fromRGBO(114, 137, 218, .7),
-      700: Color.fromRGBO(114, 137, 218, .8),
-      800: Color.fromRGBO(114, 137, 218, .9),
-      900: Color.fromRGBO(114, 137, 218, 1),
-    };
     MaterialColor myColor = MaterialColor(0xFF36393F, color);
-    MaterialColor myblue = MaterialColor(0xFF7289DA, blueDisc);
-    return Scaffold(
-          body: SingleChildScrollView(
-              child:
-              Column(
-                children: <Widget>[
-              Container(
-              width: double.infinity,
-                height: 560,
-                color: myColor,
-                padding: EdgeInsets.only(top: 32, left: 16, bottom: 0),
-                child: Column(
-                  children: <Widget>[
-                    UserWelcome(),
-                    Container(
-                      width: double.infinity,
-                      margin: EdgeInsets.only(top: 40),
-                      child: Text(
-                          'Nuestras Recomendaciones', textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white, fontSize: 22)),
-                    ),
-                    Product("assets/valvula1.jpg", "Válvula de compuerta 150",
-                        "33,250.30"),
-                    Product(
-                        "assets/valvula2.jpg", "Válvula esfera 400", "230.00"),
-                    Product(
-                        "assets/tubos1.jpg", "Tubería para perforación", "10.00"),
-                  ],
-                )
-              ),
+    return StreamBuilder<UserData>(
+      stream: DatabaseService(uid: user.uid).userData,
+      builder: (context, snapshot) {
+        if(snapshot.hasData){
+
+          UserData userData = snapshot.data;
+
+          return Scaffold(
+              body: SingleChildScrollView(
+                  child:
                   Column(
                     children: <Widget>[
-                      Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.only(top: 0),
-                        padding: EdgeInsets.only(bottom: 10, top: 10, left: 16),
-                        color: myColor,
-                        child: Text(
-                            'Ofertas', textAlign: TextAlign.left,
-                            style: TextStyle(color: Colors.white, fontSize: 22)),
-                      ),
-                      Container(
+                  Container(
+                  width: double.infinity,
+                    height: 560,
+                    color: myColor,
+                    padding: EdgeInsets.only(top: 32, left: 16, bottom: 0),
+                    child: Column(
+                      children: <Widget>[
+                        MmUserWelcomeStateful(userData.name,userData.url),
+                        Container(
                           width: double.infinity,
-                          margin: EdgeInsets.only(left: 0),
-                          color: myColor,
-                          child: Offers()
-                      )
-                    ],
+                          margin: EdgeInsets.only(top: 40),
+                          child: Text(
+                              'Nuestras Recomendaciones', textAlign: TextAlign.left,
+                              style: TextStyle(color: Colors.white, fontSize: 22)),
+                        ),
+                        Product("assets/valvula1.jpg", "Válvula de compuerta 150",
+                            "33,250.30"),
+                        Product(
+                            "assets/valvula2.jpg", "Válvula esfera 400", "230.00"),
+                        Product(
+                            "assets/tubos1.jpg", "Tubería para perforación", "10.00"),
+                      ],
+                    )
                   ),
-                ],
-              )
-          ),
-      );
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            width: double.infinity,
+                            margin: EdgeInsets.only(top: 0),
+                            padding: EdgeInsets.only(bottom: 10, top: 10, left: 16),
+                            color: myColor,
+                            child: Text(
+                                'Ofertas', textAlign: TextAlign.left,
+                                style: TextStyle(color: Colors.white, fontSize: 22)),
+                          ),
+                          Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.only(left: 0),
+                              color: myColor,
+                              child: Offers()
+                          )
+                        ],
+                      ),
+                    ],
+                  )
+              ),
+          );
+        }else{
+          return Loading();
+        }
+      }
+    );
   }
 }
 
-class UserWelcome extends StatelessWidget {
+class MmUserWelcomeStateful extends StatefulWidget {
+  final String username;
+  final String url;
+
+  MmUserWelcomeStateful(this.username,this.url);
+
+  @override
+  MmUserWelcome createState() => MmUserWelcome();
+}
+
+class MmUserWelcome extends State<MmUserWelcomeStateful> {
 
   @override
   Widget build(BuildContext context) {
@@ -107,14 +117,14 @@ class UserWelcome extends StatelessWidget {
           height: 50,
           margin: const EdgeInsets.only(top: 0,right: 10.0),
           decoration: BoxDecoration(
-            image: const DecorationImage(
-              image: AssetImage('assets/harold.jpg'),
+            image: DecorationImage(
+              image: NetworkImage(widget.url),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(50),
           ),
         ),
-        Text('¡Bienvenido, Harold!',
+        Text('¡Bienvenido, ${widget.username}!',
             style: TextStyle(color: Colors.white, fontSize: 26))
       ],
     );

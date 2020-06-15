@@ -44,6 +44,7 @@ class MmPurchase extends State<MmPurchaseStateful> {
 
   //PARA LIGAR LAS VARIABLES RECIBIDAS A LA SCREEN
   void initState() {
+    super.initState();
   _monto               = soloNumeros(widget.price); //Recibe en 9000 <= 90,00
   _montoDetallado               = montoMoneda(widget.price);
   }
@@ -56,7 +57,6 @@ class MmPurchase extends State<MmPurchaseStateful> {
   var _stripe                 = new Stripe();
 
   String _token               = 'Sin token';
-  String _idPago            = 'Primero necesitas generar un token';
 
   //API KEY
   String _secretKey           = 'sk_test_51Gtj5lKf7cAo5ARcqjaml25p8AVC1CXUXxjz1cIhqTw4gH42QBUgurPSgfvHxF3Xn9gNDFYqdCgJa0Z0w4TO3uvW00MofyGXG4';//<-- your secretKey
@@ -65,10 +65,8 @@ class MmPurchase extends State<MmPurchaseStateful> {
 
   String _concepto            = 'Pago a Metromobile ';
 
-
-  @override
   DateTime now = DateTime.now();
-
+  @override
   Widget build(BuildContext context) {
     Map<int, Color> grayDisc = {
       50: Color.fromRGBO(54, 57, 63, .1),
@@ -354,7 +352,6 @@ class MmPurchase extends State<MmPurchaseStateful> {
     else{
       _stripe.createCharge(_token,_monto,_concepto,_secretKey).then((data){
         setState(() {
-          _idPago = data;
 
           //MANDAR A LA OTRA PANTALLA
           //data seria el comprobate de pago
