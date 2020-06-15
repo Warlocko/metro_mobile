@@ -68,6 +68,7 @@ class MmHomepage extends State<MmHomepageStateful> {
                   ),
                       Column(
                         children: <Widget>[
+
                           Container(
                             width: double.infinity,
                             margin: EdgeInsets.only(top: 0),
@@ -82,7 +83,23 @@ class MmHomepage extends State<MmHomepageStateful> {
                               margin: EdgeInsets.only(left: 0),
                               color: myColor,
                               child: Offers()
-                          )
+                          ),
+                          Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.only(top: 0),
+                              padding: EdgeInsets.only(bottom: 15, top: 20, left: 22, right: 22),
+                              color: myColor,
+                              child:  RaisedButton(
+                                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmVisionStateful() )),
+
+                                color: Colors.orange,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25)
+                                ),
+                                padding: EdgeInsets.only(top: 15, bottom: 15, left: 75, right: 75),
+                                child: const Text('Escanear rostros', style: TextStyle(color: Colors.white, fontSize: 18)),
+
+                              )),
                         ],
                       ),
                     ],
