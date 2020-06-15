@@ -5,6 +5,9 @@ import 'package:metromobile/database.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
+import 'package:metromobile/MLVision.dart';
+
 class MmHomepageStateful extends StatefulWidget {
   @override
   MmHomepage createState() => MmHomepage();
@@ -42,7 +45,9 @@ class MmHomepage extends State<MmHomepageStateful> {
     MaterialColor myColor = MaterialColor(0xFF36393F, color);
     MaterialColor myblue = MaterialColor(0xFF7289DA, blueDisc);
     return Scaffold(
+
           body: SingleChildScrollView(
+
               child:
               Column(
                 children: <Widget>[
@@ -70,8 +75,29 @@ class MmHomepage extends State<MmHomepageStateful> {
                   ],
                 )
               ),
+
+
                   Column(
                     children: <Widget>[
+
+                      Container(
+                          width: double.infinity,
+                          margin: EdgeInsets.only(top: 0),
+                          padding: EdgeInsets.only(bottom: 15, top: 20, left: 22, right: 22),
+                          color: myColor,
+                          child:  RaisedButton(
+                            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmVisionStateful() )),
+
+                            color: Colors.orange,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25)
+                            ),
+                            padding: EdgeInsets.only(top: 20, bottom: 20, left: 75, right: 75),
+                            child: const Text('Escanear un producto', style: TextStyle(color: Colors.white, fontSize: 22)),
+
+                          )
+                      ),
+
                       Container(
                         width: double.infinity,
                         margin: EdgeInsets.only(top: 0),
@@ -81,6 +107,7 @@ class MmHomepage extends State<MmHomepageStateful> {
                             'Ofertas', textAlign: TextAlign.left,
                             style: TextStyle(color: Colors.white, fontSize: 22)),
                       ),
+
                       Container(
                           width: double.infinity,
                           margin: EdgeInsets.only(left: 0),
