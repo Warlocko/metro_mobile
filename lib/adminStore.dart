@@ -111,7 +111,6 @@ class MmAdminStoreState extends State<MmAdminStore> {
                         validator: (value) =>  value.isEmpty ? 'Ingresa la descripción' : null,
                       )
                   ),
-                  SizedBox(height: 12.0),
                   Container(
                         margin: EdgeInsets.only(bottom: 10),
                         height: 50,
@@ -143,6 +142,22 @@ class MmAdminStoreState extends State<MmAdminStore> {
                             labelText: 'Imágen del Producto (URL)',
                           ),
                           validator: (value) =>  value.isEmpty ? 'Ingresa la imágen' : null,
+                        )
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        height: 50,
+                        width: MediaQuery.of(context).size.width * 0.80,
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            filled: true,
+                            border: OutlineInputBorder(),
+                            fillColor: Colors.black.withOpacity(0.5),
+                            labelStyle: TextStyle(color: Colors.white),
+                            labelText: 'Categoría del producto',
+                          ),
+                          validator: (value) =>  value.isEmpty ? 'Ingresa la categoría' : null,
                         )
                     ),
                     Container(
