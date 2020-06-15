@@ -54,7 +54,7 @@ class MmConfirmation extends State<MmConfirmationStateful> {
         body: SingleChildScrollView(
             child: Container(
                 width: double.infinity,
-                height: 600,
+                height: 750,
                 color: myGrey,
                 child: Column(children: <Widget>[
                   Container(
