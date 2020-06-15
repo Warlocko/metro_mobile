@@ -7,8 +7,9 @@ class MmProductStateful extends StatefulWidget {
   final String description;
   final String price;
   final String image;
+  final String uid;
 
-  MmProductStateful(this.name,this.description,this.price,this.image);
+  MmProductStateful(this.name,this.description,this.price,this.image,this.uid);
 
   @override
   MmProduct createState() => MmProduct();
@@ -83,7 +84,7 @@ class MmProduct extends State<MmProductStateful> {
                   const SizedBox(height: 25),
                   RaisedButton(
                     onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                        MmPurchaseStateful(widget.price)
+                        MmPurchaseStateful(widget.price,widget.uid,widget.name)
 
                     )),
                     color: Colors.orange,

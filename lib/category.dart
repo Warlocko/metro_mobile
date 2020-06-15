@@ -8,7 +8,10 @@ import 'package:metromobile/database.dart';
 
 class MmCategoryStateful extends StatefulWidget {
   final String id;
-  MmCategoryStateful(this.id);
+  final String uid;
+
+  MmCategoryStateful(this.id, this.uid);
+
   @override
   MmCategory createState() => MmCategory();
 }
@@ -60,7 +63,7 @@ class MmCategory extends State<MmCategoryStateful> {
                       child:
                       Text("Válvulas", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 26),)
                   ),
-                  ProductCard(widget.id),
+                  ProductCard(widget.id, widget.uid),
                 ],
               ),
             ),
@@ -72,8 +75,9 @@ class MmCategory extends State<MmCategoryStateful> {
 
 class ProductCard extends StatefulWidget {
   final String id;
+  final String uid;
 
-  ProductCard(this.id);
+  ProductCard(this.id, this.uid);
 
   @override
   _ProductCardState createState() => _ProductCardState();
@@ -94,7 +98,7 @@ class _ProductCardState extends State<ProductCard> {
                   itemCount: snapshot.data.documents.length,
                   itemBuilder: (context, index) {
                     var productCollection = snapshot.data.documents;
-                    return Product(productCollection[index]['name'],productCollection[index]['description'],productCollection[index]['price'],productCollection[index]['url']);
+                    return Product(productCollection[index]['name'],productCollection[index]['description'],productCollection[index]['price'],productCollection[index]['url'],widget.uid);
                     },
                   );
                   }
@@ -109,13 +113,14 @@ class Product extends StatelessWidget {
   final String description;
   final String price;
   final String url;
+  final String uid;
 
-  Product(this.name,this.description,this.price,this.url);
+  Product(this.name,this.description,this.price,this.url,this.uid);
 
   @override
   Widget build(BuildContext context) {
     return new InkWell(
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmProductStateful(this.name,this.description,this.price,this.url))),
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmProductStateful(this.name,this.description,this.price,this.url,this.uid))),
         child: Row(
           children: <Widget>[
             Container(width: 100,

@@ -10,6 +10,7 @@ class DatabaseService {
 
     final CollectionReference userCollection = Firestore.instance.collection('user');
     final CollectionReference categoriesCollection = Firestore.instance.collection('categories');
+    final CollectionReference ordersCollection = Firestore.instance.collection('orders');
 
     Future updateUserData(String role, String email, String username, String address, String picUrl) async{
         return await userCollection.document(uid).setData({
@@ -27,6 +28,17 @@ class DatabaseService {
           'description': description,
           'price': price,
           'url': url,
+        });
+    }
+
+    Future updateOrderData(String oid, String prodName, String uid, String username, String address, String price, String date) async{
+        return await ordersCollection.document().setData({
+          'orderID': oid,
+          'product': prodName,
+          'userID': uid,
+          'username': username,
+          'monto': price,
+          'fecha': date,
         });
     }
 

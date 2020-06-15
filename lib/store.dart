@@ -97,7 +97,7 @@ class MmStore extends State<MmStoreStateful> {
                       child: ListView.builder(
                       itemCount: categories.length,
                       itemBuilder: (context, index) {
-                        return Category(categories[index]);
+                        return Category(categories[index], userData.uid);
                       },),
                   ),
                   SizedBox(height: 260,)
@@ -302,8 +302,9 @@ class MmStore extends State<MmStoreStateful> {
 
 class Category extends StatelessWidget {
   final CategoryM category;
+  final String uid;
 
-  Category(this.category);
+  Category(this.category, this.uid);
 
 
   @override
@@ -311,7 +312,7 @@ class Category extends StatelessWidget {
     return StreamProvider<List<ProductM>>.value(
         value: DatabaseService().getCategoryProducts(category.id),
         child: new InkWell(
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmCategoryStateful(category.id))),
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmCategoryStateful(category.id, this.uid))),
           child: Row(
             children: <Widget>[
               Container(width: 100,

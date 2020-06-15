@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:metromobile/navbar.dart';
 import 'package:metromobile/store.dart';
 
 class MmConfirmationStateful extends StatefulWidget {
@@ -57,19 +58,7 @@ class MmConfirmation extends State<MmConfirmationStateful> {
                 height: 750,
                 color: myGrey,
                 child: Column(children: <Widget>[
-                  Container(
-                      height: 50,
-                      width: double.infinity,
-                      margin: EdgeInsets.only(top: 32, left: 0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: new IconButton(
-                          icon: new Icon(Icons.arrow_back, color: Colors.white),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      )),
+                  SizedBox(height: 75,),
                   Container(
                       width: double.infinity,
                       margin: EdgeInsets.only(top: 50, bottom: 20),
@@ -92,13 +81,13 @@ class MmConfirmation extends State<MmConfirmationStateful> {
                     ),
                   ),
                   RaisedButton(
-                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmStoreStateful())),
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmNavbarStateful())),
                     color: myblue,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25)
                     ),
                     padding: EdgeInsets.only(top: 20, bottom: 20, left: 75, right: 75),
-                    child: const Text('Regresar a la tienda', style: TextStyle(color: Colors.white, fontSize: 18)),
+                    child: const Text('Regresar al inicio', style: TextStyle(color: Colors.white, fontSize: 18)),
                   )
                 ]))));
   }
