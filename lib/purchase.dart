@@ -358,6 +358,7 @@ class MmPurchase extends State<MmPurchaseStateful> {
     }
 
     _concepto = _concepto + ", Pedido #" + orderID;
+    _concepto = _concepto + ", Producto "+ widget.product;
 
     //usa _token para autorizar el pago
     if (_token == 'Sin token' ||
