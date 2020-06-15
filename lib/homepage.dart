@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:metromobile/database.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MmHomepageStateful extends StatefulWidget {
   @override
@@ -9,6 +13,8 @@ class MmHomepageStateful extends StatefulWidget {
 class MmHomepage extends State<MmHomepageStateful> {
   @override
   Widget build(BuildContext context) {
+
+
     Map<int, Color> color = {
       50: Color.fromRGBO(54, 57, 63, .1),
       100: Color.fromRGBO(54, 57, 63, .2),
@@ -36,57 +42,57 @@ class MmHomepage extends State<MmHomepageStateful> {
     MaterialColor myColor = MaterialColor(0xFF36393F, color);
     MaterialColor myblue = MaterialColor(0xFF7289DA, blueDisc);
     return Scaffold(
-        body: SingleChildScrollView(
-            child:
-            Column(
-              children: <Widget>[
-            Container(
-            width: double.infinity,
-              height: 560,
-              color: myColor,
-              padding: EdgeInsets.only(top: 32, left: 16, bottom: 0),
-              child: Column(
+          body: SingleChildScrollView(
+              child:
+              Column(
                 children: <Widget>[
-                  UserWelcome(),
-                  Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(top: 40),
-                    child: Text(
-                        'Nuestras Recomendaciones', textAlign: TextAlign.left,
-                        style: TextStyle(color: Colors.white, fontSize: 22)),
-                  ),
-                  Product("assets/valvula1.jpg", "Válvula de compuerta 150",
-                      "33,250.30"),
-                  Product(
-                      "assets/valvula2.jpg", "Válvula esfera 400", "230.00"),
-                  Product(
-                      "assets/tubos1.jpg", "Tubería para perforación", "10.00"),
-                ],
-              )
-            ),
-                Column(
+              Container(
+              width: double.infinity,
+                height: 560,
+                color: myColor,
+                padding: EdgeInsets.only(top: 32, left: 16, bottom: 0),
+                child: Column(
                   children: <Widget>[
+                    UserWelcome(),
                     Container(
                       width: double.infinity,
-                      margin: EdgeInsets.only(top: 0),
-                      padding: EdgeInsets.only(bottom: 10, top: 10, left: 16),
-                      color: myColor,
+                      margin: EdgeInsets.only(top: 40),
                       child: Text(
-                          'Ofertas', textAlign: TextAlign.left,
+                          'Nuestras Recomendaciones', textAlign: TextAlign.left,
                           style: TextStyle(color: Colors.white, fontSize: 22)),
                     ),
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.only(left: 0),
-                        color: myColor,
-                        child: Offers()
-                    )
+                    Product("assets/valvula1.jpg", "Válvula de compuerta 150",
+                        "33,250.30"),
+                    Product(
+                        "assets/valvula2.jpg", "Válvula esfera 400", "230.00"),
+                    Product(
+                        "assets/tubos1.jpg", "Tubería para perforación", "10.00"),
                   ],
-                ),
-              ],
-            )
-        ),
-    );
+                )
+              ),
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(top: 0),
+                        padding: EdgeInsets.only(bottom: 10, top: 10, left: 16),
+                        color: myColor,
+                        child: Text(
+                            'Ofertas', textAlign: TextAlign.left,
+                            style: TextStyle(color: Colors.white, fontSize: 22)),
+                      ),
+                      Container(
+                          width: double.infinity,
+                          margin: EdgeInsets.only(left: 0),
+                          color: myColor,
+                          child: Offers()
+                      )
+                    ],
+                  ),
+                ],
+              )
+          ),
+      );
   }
 }
 

@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:metromobile/category.dart';
-import 'package:metromobile/homepage.dart';
+import 'package:metromobile/categoryM.dart';
+import 'package:metromobile/productM.dart';
+import 'package:metromobile/database.dart';
 import 'package:metromobile/navbar.dart';
+import 'package:provider/provider.dart';
 
 class MmStoreStateful extends StatefulWidget {
   @override
@@ -13,6 +16,9 @@ class MmStore extends State<MmStoreStateful> {
 
   @override
   Widget build(BuildContext context) {
+
+  final categories = Provider.of<List<CategoryM>>(context);
+
     Map<int, Color> grayDisc = {
       50: Color.fromRGBO(54, 57, 63, .1),
       100: Color.fromRGBO(54, 57, 63, .2),
@@ -44,7 +50,7 @@ class MmStore extends State<MmStoreStateful> {
         child:
         Container(
           width: double.infinity,
-          height: 710,
+          height: 800,
           color: myGrey,
           child: Column(
             children: <Widget>[
@@ -82,10 +88,14 @@ class MmStore extends State<MmStoreStateful> {
                   ),
                 ),
               ),
-              Category("assets/valvula1.jpg", "Válvulas"),
-              Category("assets/bomba1.jpg", "Bombas"),
-              Category("assets/tubos2.jpg", "Tuberías"),
-              Category("assets/placa1.jpg", "Placas de acero al carbón"),
+              Expanded(
+                  child: ListView.builder(
+                  itemCount: categories.length,
+                  itemBuilder: (context, index) {
+                    return Category(categories[index]);
+                  },),
+              ),
+              SizedBox(height: 260,)
             ],
           ),
         )
@@ -95,47 +105,50 @@ class MmStore extends State<MmStoreStateful> {
 }
 
 class Category extends StatelessWidget {
-  final String image;
-  final String name;
+  final CategoryM category;
 
-  Category(this.image, this.name);
+  Category(this.category);
+
 
   @override
   Widget build(BuildContext context) {
-    return new InkWell(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmCategoryStateful())),
-        child: Row(
-          children: <Widget>[
-            Container(width: 100,
-              height: 100,
-              margin: const EdgeInsets.only(top: 30.0, right: 10.0, left: 16),
-              decoration: BoxDecoration(
+    return StreamProvider<List<ProductM>>.value(
+        value: DatabaseService().getCategoryProducts(category.id),
+        child: new InkWell(
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmCategoryStateful(category.id))),
+          child: Row(
+            children: <Widget>[
+              Container(width: 100,
+                height: 100,
+                margin: const EdgeInsets.only(top: 0, right: 10.0, left: 16,bottom: 30),
+                decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(this.image),
+                  image: NetworkImage(category.url),
                   fit: BoxFit.cover,
                 ),
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(30),
               ),
-            ),
-            Container(
-              width: 220,
-              margin: EdgeInsets.only(left: 10),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                      width: 220,
-                      margin: EdgeInsets.only(top: 50,bottom: 20),
-                      child:
-                      Text(this.name, textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold))
-                  ),
-                ],
               ),
-            )
-          ],
-        )
+              Container(
+                width: 220,
+                margin: EdgeInsets.only(left: 10),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: 220,
+                        margin: EdgeInsets.only(top: 0,bottom: 20),
+                        child:
+                        Text(category.name, textAlign: TextAlign.left,
+                            style: TextStyle(color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold))
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )
+      ),
     )
       ;
   }

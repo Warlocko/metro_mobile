@@ -162,7 +162,7 @@ class MmRegister extends State<MmRegisterStateful>{
                           onPressed: () async {
                             if(_formKey.currentState.validate()){
                               setState(() => loading = true);
-                              dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                              dynamic result = await _auth.registerWithEmailAndPassword(email, password, username);
                               if(result == null){
                                 setState(() {
                                   error = 'Ingresa un correo válido.';

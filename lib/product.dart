@@ -4,10 +4,11 @@ import 'package:metromobile/purchase.dart';
 
 class MmProductStateful extends StatefulWidget {
   final String name;
-  final String image;
+  final String description;
   final String price;
+  final String image;
 
-  MmProductStateful(this.name,this.image,this.price);
+  MmProductStateful(this.name,this.description,this.price,this.image);
 
   @override
   MmProduct createState() => MmProduct();
@@ -77,7 +78,7 @@ class MmProduct extends State<MmProductStateful> {
                     margin: EdgeInsets.only(bottom: 20),
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(widget.image),
+                        image: NetworkImage(widget.image),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.circular(5),
@@ -86,7 +87,7 @@ class MmProduct extends State<MmProductStateful> {
                   Container(
                     width: MediaQuery.of(context).size.width * 0.90,
                     padding: EdgeInsets.only(bottom: 20),
-                    child: Text("Está válvula de uso profesional permite el paso de grandes cantidades de presión y es considerada de uso profesional para grandes sistemas hidráulicos. \n\nSu instalación es fácil e intuitiva y es capaz de ser muy escalable según el sistema en el que se trabaje.",  style: TextStyle(color: Colors.white, height: 1.5, fontSize: 18)),
+                    child: Text(widget.description,  style: TextStyle(color: Colors.white, height: 1.5, fontSize: 18)),
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.90,

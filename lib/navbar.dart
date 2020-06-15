@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:metromobile/category.dart';
+import 'package:metromobile/categoryM.dart';
+import 'package:metromobile/database.dart';
 import 'package:metromobile/homepage.dart';
 import 'package:metromobile/store.dart';
 import 'package:metromobile/aboutUs.dart';
 import 'package:metromobile/user.dart';
+import 'package:provider/provider.dart';
 
 class MmNavbarStateful extends StatefulWidget {
   @override
@@ -22,6 +24,7 @@ class MmNavbar extends State<MmNavbarStateful> {
 
   @override
   Widget build(BuildContext context) {
+
     Map<int, Color> grayDisc = {
       50: Color.fromRGBO(54, 57, 63, .1),
       100: Color.fromRGBO(54, 57, 63, .2),
@@ -48,36 +51,39 @@ class MmNavbar extends State<MmNavbarStateful> {
     };
     MaterialColor myGrey = MaterialColor(0xFF36393F, grayDisc);
     MaterialColor myblue = MaterialColor(0xFF7289DA, blueDisc);
-    return Scaffold(
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        type : BottomNavigationBarType.fixed,
-        iconSize: 30,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text(''),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            title: Text(''),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text(''),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.help_outline),
-            title: Text(''),
-          ),
-        ],
-        currentIndex: _currentIndex,
-        onTap: onTabTapped,
-        selectedItemColor: Colors.amber[800],
-        backgroundColor: myblue,
-      )
+    return StreamProvider<List<CategoryM>>.value(
+        value: DatabaseService().categories,
+        child: Scaffold(
+        body: _children[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          type : BottomNavigationBarType.fixed,
+          iconSize: 30,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text(''),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              title: Text(''),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              title: Text(''),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.help_outline),
+              title: Text(''),
+            ),
+          ],
+          currentIndex: _currentIndex,
+          onTap: onTabTapped,
+          selectedItemColor: Colors.amber[800],
+          backgroundColor: myblue,
+        )
+      ),
     );
   }
   void onTabTapped(int index) {

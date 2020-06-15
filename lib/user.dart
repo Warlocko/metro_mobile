@@ -182,51 +182,6 @@ class MmUser extends State<MmUserStateful> {
                         ),
                         Container(
                           width: double.infinity,
-                          padding: EdgeInsets.only(left: 30),
-                          child: Column(
-                            children: <Widget>[
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text("\nHistorial de Compras",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        height: 1.5,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text("Pedido #35138524",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        height: 1.5,
-                                        fontSize: 18)),
-                              ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text("Pedido #63842568",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        height: 1.5,
-                                        fontSize: 18)),
-                              ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text("Pedido #85369201",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        height: 1.5,
-                                        fontSize: 18)),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          width: double.infinity,
                           padding: EdgeInsets.only(left: 30, right: 30),
                           child: Column(
                             children: <Widget>[

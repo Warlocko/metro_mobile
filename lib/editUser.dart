@@ -8,6 +8,12 @@ class MmUserEditStateful extends StatefulWidget {
 }
 
 class MmUserEdit extends State<MmUserEditStateful> {
+
+  final _formKey = GlobalKey<FormState>();
+
+  String _currentName;
+
+
   @override
   Widget build(BuildContext context) {
     Map<int, Color> grayDisc = {
@@ -44,7 +50,7 @@ class MmUserEdit extends State<MmUserEditStateful> {
                 color: myGrey,
                 child: Column(children: <Widget>[
                   Container(
-                    width: double.infinity,
+                      width: double.infinity,
                       color: Colors.black.withOpacity(0.5),
                       padding: EdgeInsets.only(bottom: 20, top: 20.0),
                       margin: EdgeInsets.only(top: 100, bottom: 30),
@@ -65,16 +71,18 @@ class MmUserEdit extends State<MmUserEditStateful> {
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold))),
                                 Container(
-                                  width: MediaQuery.of(context).size.width * 0.9,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
                                   height: 50,
                                   margin: EdgeInsets.only(bottom: 20),
-                                  child: TextField(
+                                  child: TextFormField(
                                     style: TextStyle(color: Colors.white),
                                     decoration: InputDecoration(
                                       filled: true,
                                       border: OutlineInputBorder(),
                                       fillColor: Colors.black.withOpacity(0.5),
-                                      labelStyle: TextStyle(color: Colors.white),
+                                      labelStyle:
+                                          TextStyle(color: Colors.white),
                                       labelText: 'Nombre de Usuario',
                                     ),
                                   ),
@@ -92,17 +100,23 @@ class MmUserEdit extends State<MmUserEditStateful> {
                             ),
                           ),
                           Container(
-                            width: 150,
-                            height: 150,
-                            margin:
-                            const EdgeInsets.only(right: 10.0, left: 16),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('assets/harold.jpg'),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.circular(100),
-                            ),
+                                    child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.9,
+                                    height: 50,
+                                    margin: EdgeInsets.only(bottom: 20),
+                                    child: TextFormField(
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        border: OutlineInputBorder(),
+                                        fillColor: Colors.black.withOpacity(0.5),
+                                        labelStyle:
+                                            TextStyle(color: Colors.white),
+                                        labelText: 'URL de la nueva imagen',
+                                      ),
+                                    ),
+                                  ),
                           ),
                           Container(
                             height: 45,
@@ -118,23 +132,23 @@ class MmUserEdit extends State<MmUserEditStateful> {
                             ),
                           ),
                           Container(
-
                               width: MediaQuery.of(context).size.width * 0.80,
-                              margin: EdgeInsets.only(left:12,top:12,right:12,bottom: 31),
-
+                              margin: EdgeInsets.only(
+                                  left: 12, top: 12, right: 12, bottom: 31),
                               height: 5 * 12.0,
-
                               child: TextFormField(
                                 maxLines: null,
                                 style: TextStyle(color: Colors.white),
                                 keyboardType: TextInputType.multiline,
                                 decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 1.0),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 5.0, horizontal: 1.0),
                                   filled: true,
                                   border: OutlineInputBorder(),
                                   fillColor: Colors.black.withOpacity(0.5),
-                                  labelStyle: TextStyle(color: Colors.white),
-
+                                  labelStyle:
+                                          TextStyle(color: Colors.white),
+                                  labelText: 'Dirección de entrega',
                                 ),
                               )),
                         ],
