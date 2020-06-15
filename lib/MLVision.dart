@@ -41,6 +41,7 @@ class MmVision extends State<MmVisionStateful> {
 
   //PARA LIGAR LAS VARIABLES RECIBIDAS A LA SCREEN
   void initState() {
+    super.initState();
     _monto               = soloNumeros("a"); //Recibe en 9000 <= 90,00
     _montoDetallado               = montoMoneda("b");
   }
@@ -53,7 +54,6 @@ class MmVision extends State<MmVisionStateful> {
   var _stripe                 = new Stripe();
 
   String _token               = 'Sin token';
-  String _idPago            = 'Primero necesitas generar un token';
 
   //API KEY
   String _secretKey           = 'sk_test_51Gtj5lKf7cAo5ARcqjaml25p8AVC1CXUXxjz1cIhqTw4gH42QBUgurPSgfvHxF3Xn9gNDFYqdCgJa0Z0w4TO3uvW00MofyGXG4';//<-- your secretKey
@@ -351,7 +351,6 @@ class MmVision extends State<MmVisionStateful> {
     else{
       _stripe.createCharge(_token,_monto,_concepto,_secretKey).then((data){
         setState(() {
-          _idPago = data;
 
           //MANDAR A LA OTRA PANTALLA
           //data seria el comprobate de pago

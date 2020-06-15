@@ -11,7 +11,8 @@ class UserData {
   final String url;
   final String address;
   final String mail;
+  final String role;
 
-  UserData({this.uid, this.name, this.url, this.address, this.mail});
+  UserData({this.uid, this.name, this.url, this.address, this.mail, this.role});
 
 }

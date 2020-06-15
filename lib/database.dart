@@ -11,12 +11,22 @@ class DatabaseService {
     final CollectionReference userCollection = Firestore.instance.collection('user');
     final CollectionReference categoriesCollection = Firestore.instance.collection('categories');
 
-    Future updateUserData(String email, String username, String address, String picUrl) async{
+    Future updateUserData(String role, String email, String username, String address, String picUrl) async{
         return await userCollection.document(uid).setData({
+           'role': role,
            'email': email,
            'username': username,
            'address': address,
            'picUrl': picUrl,
+        });
+    }
+
+    Future updateProductData(String cid, String name, String description, String url, String price) async{
+        return await categoriesCollection.document(cid).collection('productos').document().setData({
+          'name': name,
+          'description': description,
+          'price': price,
+          'url': url,
         });
     }
 
@@ -43,6 +53,7 @@ class DatabaseService {
 
     UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
       return UserData(
+        role: snapshot.data['role'],
         uid: uid,
         name: snapshot.data['username'],
         url: snapshot.data['picUrl'],

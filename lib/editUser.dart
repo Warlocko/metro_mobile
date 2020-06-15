@@ -184,10 +184,11 @@ class MmUserEdit extends State<MmUserEditStateful> {
                           onPressed: () async{
                               if(_formKey.currentState.validate()){
                                 await DatabaseService(uid: user.uid).updateUserData(
+                                  userData.role,
                                   userData.mail,
                                   _currentName ?? userData.name, 
                                   _currentAddress ?? userData.address, 
-                                  _currentUrl ?? userData.url).then;
+                                  _currentUrl ?? userData.url);
                               }
                             Navigator.pop(context);
                             },
