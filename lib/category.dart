@@ -9,8 +9,9 @@ import 'package:metromobile/database.dart';
 class MmCategoryStateful extends StatefulWidget {
   final String id;
   final String uid;
+  final String catName;
 
-  MmCategoryStateful(this.id, this.uid);
+  MmCategoryStateful(this.id, this.uid, this.catName);
 
   @override
   MmCategory createState() => MmCategory();
@@ -61,7 +62,7 @@ class MmCategory extends State<MmCategoryStateful> {
                   Container(
                       width: double.infinity,
                       child:
-                      Text("Válvulas", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 26),)
+                      Text(widget.catName, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 26),)
                   ),
                   ProductCard(widget.id, widget.uid),
                 ],

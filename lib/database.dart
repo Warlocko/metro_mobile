@@ -36,6 +36,7 @@ class DatabaseService {
           'orderID': oid,
           'product': prodName,
           'userID': uid,
+          'address': address,
           'username': username,
           'monto': price,
           'fecha': date,

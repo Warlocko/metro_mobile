@@ -266,12 +266,12 @@ class MmStore extends State<MmStoreStateful> {
                             if(_formKey.currentState.validate()){
                                 await DatabaseService().updateProductData(
                                   _currentCategory,
-                                  nameController.text ?? 'Producto Inválido',
+                                  nameController.text ?? 'Sin nombre',
                                   descriptionController.text ?? 'Sin descripción',
                                   urlController.text ?? 'https://lh3.googleusercontent.com/proxy/vky2xIaLoUCsU7CwcFNJ0hIxs8fZC-8RDcdIlXPnPn8BHb6lN6JIdkQC2UBY3AWQBNlDoCfCMH6SjitvKaJeQh9RcqaYmnWoM9NyHSGdpwKIYwSHmYLqNIHLvF53',
                                   priceController.text ?? '0.0');
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => MmNavbarStateful()));
                               }
-                               Navigator.push(context, MaterialPageRoute(builder: (context) => MmNavbarStateful()));
                             },
                         color: myblue,
                         shape: RoundedRectangleBorder(
@@ -312,7 +312,7 @@ class Category extends StatelessWidget {
     return StreamProvider<List<ProductM>>.value(
         value: DatabaseService().getCategoryProducts(category.id),
         child: new InkWell(
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmCategoryStateful(category.id, this.uid))),
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MmCategoryStateful(category.id, this.uid, category.name))),
           child: Row(
             children: <Widget>[
               Container(width: 100,
